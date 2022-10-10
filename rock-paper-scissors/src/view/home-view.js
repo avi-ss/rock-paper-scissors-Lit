@@ -4,8 +4,6 @@ import "@vaadin/text-field";
 import "@vaadin/button";
 import { Notification } from "@vaadin/notification";
 
-import { Router } from "@vaadin/router";
-
 export class HomeView extends LitElement {
   static get properties() {
     return {

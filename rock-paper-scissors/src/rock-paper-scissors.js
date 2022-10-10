@@ -33,9 +33,11 @@ export class RockPaperScissors extends LitElement {
     });
   }
 
+  // This callback gets called when a change in the path ocurs
   handleNavigation(location) {
     const path = location.pathname;
-    console.log(path);
+    // Change the property accordly
+    this.view = path === "/" ? "home" : path.slice(1);
   }
 
   getActiveView() {
@@ -66,13 +68,8 @@ export class RockPaperScissors extends LitElement {
   render() {
     return html`
       <div class="header">
-        <vaadin-button class="button" theme="icon">
-          <vaadin-icon
-            icon="vaadin:arrow-backward"
-            @click=${this.onLogout}
-          ></vaadin-icon>
-        </vaadin-button>
-        <h1>Rock, Paper, Scissors!</h1>
+        <h1>🪨, 📜, ✂️!</h1>
+        <vaadin-button class="button" theme="icon">🏠</vaadin-button>
       </div>
       ${this.getActiveView()}
     `;
@@ -81,16 +78,19 @@ export class RockPaperScissors extends LitElement {
   static get styles() {
     return css`
       h1 {
-        font-size: 18px;
         margin: 16px;
       }
 
       .button {
-        margin-left: 16px;
+        margin-right: 16px;
+        font-size: 30px;
+        height: 60px;
+        width: 60px;
+        background-color: rgba(100, 20, 200, 0.4);
       }
 
       .header {
-        height: 70px;
+        height: 80px;
         width: 100%;
         box-sizing: border-box;
         position: sticky;
@@ -98,7 +98,7 @@ export class RockPaperScissors extends LitElement {
         left: 0;
         display: flex;
         align-items: center;
-        justify-content: start;
+        justify-content: space-between;
       }
     `;
   }

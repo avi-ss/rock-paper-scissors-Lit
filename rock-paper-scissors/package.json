@@ -8,7 +8,7 @@
     "test": "web-test-runner --coverage",
     "test:watch": "web-test-runner --watch",
     "analyze": "cem analyze --litelement",
-    "start": "web-dev-server"
+    "start": "web-dev-server --app-index index.html"
   },
   "dependencies": {
     "@vaadin/button": "^23.2.4",
