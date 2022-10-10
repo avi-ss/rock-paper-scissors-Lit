@@ -16,6 +16,12 @@ export class GameView extends LitElement {
       _isResultPending: {
         type: Boolean,
       },
+      _playerOption: {
+        type: String,
+      },
+      _botOption: {
+        type: String,
+      },
       _resultText: {
         type: String,
       },
@@ -27,6 +33,8 @@ export class GameView extends LitElement {
 
     this.currentUser = {};
     this._isResultPending = false;
+    this._playerOption = "";
+    this._botOption = "";
     this._resultText = "";
 
     // Information about the game logic
@@ -86,7 +94,11 @@ export class GameView extends LitElement {
             >🖖</vaadin-button
           >
         </div>
-        <h1>${this._resultText}</h1>
+        <div class="results">
+          <h1 id="player">${this._playerOption}</h1>
+          <h1 id="bot">${this._botOption}</h1>
+        </div>
+        <h1 id="result-text">${this._resultText}</h1>
       </div>
     `;
   }
@@ -111,13 +123,33 @@ export class GameView extends LitElement {
         this._resultText = "It's a tie 🙅🙅🙅";
       }
 
-      // So the component reloads
-      this.currentUser = { ...this.currentUser };
+      this._restartResultsAnimation();
+      this._playerOption = this.currentUser.gender + option.text;
+      this._botOption = botOption.text + "🤖";
 
       // Save and restart the buttons
       this._isResultPending = false;
       this._saveScore();
     }, 1000);
+  }
+
+  _restartResultsAnimation() {
+    const player = this.shadowRoot.getElementById("player");
+    const bot = this.shadowRoot.getElementById("bot");
+    const results = this.shadowRoot.getElementById("result-text");
+
+    player.classList.remove("result-option");
+    bot.classList.remove("result-option");
+    results.classList.remove("result-text");
+
+    // triggering reflow : The actual magic
+    void player.offsetWidth;
+    void bot.offsetWidth;
+    void results.offsetWidth;
+
+    player.classList.add("result-option");
+    bot.classList.add("result-option");
+    results.classList.add("result-text");
   }
 
   _saveScore() {
@@ -160,6 +192,16 @@ export class GameView extends LitElement {
         gap: 10px;
       }
 
+      .results {
+        display: flex;
+        gap: 50px;
+      }
+
+      .results h1 {
+        font-size: 72px;
+        text-shadow: 4px 4px 5px black;
+      }
+
       vaadin-button {
         height: 60px;
         font-size: 64px;
@@ -170,6 +212,56 @@ export class GameView extends LitElement {
       vaadin-button:hover {
         background-color: rgba(70, 130, 80, 1);
         font-size: 70px;
+      }
+
+      .result-text {
+        animation: 2s anim-result-text ease-out forwards;
+      }
+
+      .result-option {
+        animation: 1.5s anim-result-option ease-out forwards;
+      }
+
+      @keyframes anim-result-text {
+        0% {
+          opacity: 0;
+          transform: translateY(80%);
+        }
+        20% {
+          opacity: 0;
+        }
+        50% {
+          opacity: 1;
+          transform: translateY(0%);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0%);
+        }
+      }
+
+      @keyframes anim-result-option {
+        0% {
+          transform: scale(0);
+          opacity: 0;
+          text-shadow: 0 0 0 rgba(0, 0, 0, 0);
+        }
+        25% {
+          transform: scale(1.5);
+          opacity: 1;
+          text-shadow: 3px 10px 5px rgba(0, 0, 0, 0.5);
+        }
+        50% {
+          transform: scale(1);
+          opacity: 1;
+          text-shadow: 1px 0 0 rgba(0, 0, 0, 0);
+        }
+        100% {
+          /* animate nothing to add pause at the end of animation */
+          transform: scale(1);
+          opacity: 1;
+          text-shadow: 1px 0 0 rgba(0, 0, 0, 0);
+        }
       }
     `;
   }
