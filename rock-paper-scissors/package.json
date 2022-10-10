@@ -1,0 +1,23 @@
+{
+  "name": "rock-paper-scissors",
+  "description": "Webcomponent rock-paper-scissors following open-wc recommendations",
+  "license": "MIT",
+  "author": "rock-paper-scissors",
+  "version": "0.0.0",
+  "scripts": {
+    "test": "web-test-runner --coverage",
+    "test:watch": "web-test-runner --watch",
+    "analyze": "cem analyze --litelement",
+    "start": "web-dev-server"
+  },
+  "dependencies": {
+    "lit": "^2.0.2"
+  },
+  "devDependencies": {
+    "@custom-elements-manifest/analyzer": "^0.4.17",
+    "@open-wc/testing": "next",
+    "@web/dev-server": "^0.1.28",
+    "@web/test-runner": "^0.13.22"
+  },
+  "customElements": "custom-elements.json"
+}
