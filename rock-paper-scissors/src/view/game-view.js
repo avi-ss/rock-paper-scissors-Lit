@@ -6,20 +6,27 @@ import { Notification } from "@vaadin/notification";
 export class GameView extends LitElement {
   static get properties() {
     return {
-      options: {
-        type: Array,
+      currentUser: {
+        type: Object,
       },
     };
   }
 
   constructor() {
     super();
-    this.options = [{ text: "👊", beats: "✌️" }, { text: "🖐", beats: "👊" }, { text: "✌️", beats: "🖐" }];
+
+    this.currentUser = {};
+
+    // Information about the game logic
+    this.options = [
+      { text: "👊", beats: "✌️" },
+      { text: "🖐", beats: "👊" },
+      { text: "✌️", beats: "🖐" },
+    ];
   }
 
   render() {
     return html`
-      <h3>Game!</h3>
       <vaadin-menu-bar
         .items=${this.options}
         @item-selected=${this.onOptionSelected}
@@ -34,19 +41,16 @@ export class GameView extends LitElement {
       const botOption =
         this.options[Math.floor(Math.random() * this.options.length)];
 
-        if(option.beats === botOption.text){
-            console.log("You won! " + option.text + " - " + botOption.text);
-        }
-        else if(botOption.beats === option.text) {
-            console.log("You lost... " + option.text + " - " + botOption.text)
-        }
-        else if (option.text === botOption.text) {
-            console.log("Tie " + option.text + " - " + botOption.text)
-        }
-        else {
-            console.log("Cheater detected!")
-            this._showNotification("You're cheating!", "error");
-        }
+      if (option.beats === botOption.text) {
+        console.log("You won! " + option.text + " - " + botOption.text);
+      } else if (botOption.beats === option.text) {
+        console.log("You lost... " + option.text + " - " + botOption.text);
+      } else if (option.text === botOption.text) {
+        console.log("Tie " + option.text + " - " + botOption.text);
+      } else {
+        console.log("Cheater detected!");
+        this._showNotification("You're cheating!", "error");
+      }
     }, 1000);
   }
 
