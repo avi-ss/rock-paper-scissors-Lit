@@ -26,8 +26,6 @@ export class RockPaperScissors extends LitElement {
   render() {
     return html`
       <h1>Rock, Paper, Scissors</h1>
-      <a href="/game">GAME</a>
-      <a href="/">LOGIN</a>
       <div id="outlet"></div>
     `;
   }
