@@ -4,6 +4,7 @@ import { installRouter } from "pwa-helpers/router.js";
 
 import "./view/home-view";
 import "./view/game-view";
+import "./view/ranking-view";
 
 import "@vaadin/button";
 
@@ -50,6 +51,9 @@ export class RockPaperScissors extends LitElement {
       case "game": {
         return html`<game-view .currentUser=${this.currentUser}></game-view>`;
       }
+      case "ranking": {
+        return html`<ranking-view></ranking-view>`;
+      }
     }
   }
 
@@ -72,6 +76,12 @@ export class RockPaperScissors extends LitElement {
           theme="icon"
           @click=${() => this.navigateTo({ view: "home", user: {} })}
           >🏠</vaadin-button
+        >
+        <vaadin-button
+          class="button"
+          theme="icon"
+          @click=${() => this.navigateTo({ view: "ranking", user: {} })}
+          >🎖️</vaadin-button
         >
       </div>
       ${this.getActiveView()}
@@ -107,7 +117,7 @@ export class RockPaperScissors extends LitElement {
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 40px;
+        gap: 20px;
         background-color: pink;
         box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.3);
       }
