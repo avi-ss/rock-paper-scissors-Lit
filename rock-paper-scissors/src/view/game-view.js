@@ -36,11 +36,15 @@ export class GameView extends LitElement {
     return html`
       <div class="container">
         <h1>Hi, ${this.currentUser.name}! 👋</h1>
+        <h1 style="margin-top: 0">
+          👦 ${this.currentUser.wins} - ${this.currentUser.defeats} 🤖
+        </h1>
         <vaadin-menu-bar
           theme="primary center"
           .items=${this.options}
           @item-selected=${this.onOptionSelected}
         ></vaadin-menu-bar>
+        
       </div>
     `;
   }
@@ -53,23 +57,25 @@ export class GameView extends LitElement {
         this.options[Math.floor(Math.random() * this.options.length)];
 
       if (option.beats === botOption.text) {
-        console.log("You won! " + option.text + " - " + botOption.text);
-        this.currentUser.score++;
+        this.currentUser.wins++;
       } else if (botOption.beats === option.text) {
-        console.log("You lost... " + option.text + " - " + botOption.text);
-      } else if (option.text === botOption.text) {
-        console.log("Tie " + option.text + " - " + botOption.text);
-      } else {
-        console.log("Cheater detected!");
+        this.currentUser.defeats++;
+      } else if (!option.text === botOption.text) {
         this._showNotification("You're cheating!", "error");
       }
+
+      // So the component reloads
+      this.currentUser = {...this.currentUser};
 
       this._saveScore();
     }, 1000);
   }
 
   _saveScore() {
-    localStorage.setItem(this.currentUser.name, JSON.stringify(this.currentUser));
+    localStorage.setItem(
+      this.currentUser.name,
+      JSON.stringify(this.currentUser)
+    );
   }
 
   _showNotification(text, theme) {
