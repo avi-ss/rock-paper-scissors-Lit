@@ -46,9 +46,24 @@ export class HomeView extends LitElement {
   onLogin() {
     const name = this.shadowRoot.getElementById("name");
 
+    // Validate its not null
     if (name.value == "") {
       this._showNotification("Name can't be empty!", "error");
       return;
+    }
+
+    let user = {
+      name: name.value,
+      score: 0,
+    }
+
+    // If it doesnt exist, create it
+    if(localStorage.getItem(name.value) == null){
+      localStorage.setItem(name.value, JSON.stringify(user))
+    }
+    // Else we return it
+    else {
+      user = JSON.parse(localStorage.getItem(name.value));
     }
 
     this._showNotification("Welcome, " + name.value + "!", "success");
@@ -58,10 +73,7 @@ export class HomeView extends LitElement {
       new CustomEvent("on-login", {
         detail: {
           view: "game",
-          user: {
-            name: name.value,
-            score: 0,
-          },
+          user: user
         },
       })
     );

@@ -24,7 +24,14 @@ export class GameView extends LitElement {
       { text: "✌️", beats: "🖐" },
     ];
   }
-  
+
+  // If the current user is stored
+  firstUpdated() {
+    this.currentUser = JSON.parse(localStorage.getItem("user"));
+    
+    console.log(this.currentUser);
+  }
+
   render() {
     return html`
       <div class="container">
