@@ -31,9 +31,11 @@ export class GameView extends LitElement {
 
     // Information about the game logic
     this.options = [
-      { text: "👊", beats: "✌️" },
-      { text: "🖐", beats: "👊" },
-      { text: "✌️", beats: "🖐" },
+      { text: "👊", beats: ["✌️", "🤏"] },
+      { text: "🖐", beats: ["👊", "🖖"] },
+      { text: "✌️", beats: ["🖐", "🤏"] },
+      { text: "🤏", beats: ["🖖", "🖐"] },
+      { text: "🖖", beats: ["✌️", "👊"] },
     ];
   }
 
@@ -71,6 +73,18 @@ export class GameView extends LitElement {
             ?disabled=${this._isResultPending}
             >✌️</vaadin-button
           >
+          <vaadin-button
+            theme="primary"
+            @click=${() => this.onOptionSelected(this.options[3])}
+            ?disabled=${this._isResultPending}
+            >🤏</vaadin-button
+          >
+          <vaadin-button
+            theme="primary"
+            @click=${() => this.onOptionSelected(this.options[4])}
+            ?disabled=${this._isResultPending}
+            >🖖</vaadin-button
+          >
         </div>
         <h1>${this._resultText}</h1>
       </div>
@@ -85,10 +99,10 @@ export class GameView extends LitElement {
       const botOption =
         this.options[Math.floor(Math.random() * this.options.length)];
 
-      if (option.beats === botOption.text) {
+      if (option.beats.includes(botOption.text)) {
         this.currentUser.wins++;
         this._resultText = "You won! 🎉🎉🎉"
-      } else if (botOption.beats === option.text) {
+      } else if (botOption.beats.includes(option.text)) {
         this.currentUser.defeats++;
         this._resultText = "You lost... 😭😭😭"
       } else if (!option.text === botOption.text) {

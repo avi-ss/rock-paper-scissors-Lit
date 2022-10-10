@@ -66,7 +66,7 @@ export class RockPaperScissors extends LitElement {
   render() {
     return html`
       <div class="header">
-        <h1>🪨, 📜, ✂️!</h1>
+        <h1>🪨, 📜, ✂️, 🦎, 🧛🏻!</h1>
         <vaadin-button
           class="button"
           theme="icon"
@@ -88,7 +88,13 @@ export class RockPaperScissors extends LitElement {
         font-size: 30px;
         height: 60px;
         width: 60px;
-        background-color: rgba(100, 20, 200, 0.4);
+        background-color: rgba(255, 255, 255, 0.7);
+        transition: all 0.2s linear;
+      }
+
+      .button:hover {
+        background-color: rgba(255, 255, 255, 0.9);
+        box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.3);
       }
 
       .header {
@@ -102,6 +108,8 @@ export class RockPaperScissors extends LitElement {
         align-items: center;
         justify-content: center;
         gap: 40px;
+        background-color: pink;
+        box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.3);
       }
     `;
   }
