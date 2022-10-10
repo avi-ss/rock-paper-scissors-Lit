@@ -100,13 +100,13 @@ export class HomeView extends LitElement {
     let user;
 
     // If it doesnt exist, return
-    if (localStorage.getItem(name.value) == null) {
+    if (localStorage.getItem("users." + name.value) == null) {
       this._showNotification("This player doesn't exist!", "error");
       return;
     }
     // Else we return it
     else {
-      user = JSON.parse(localStorage.getItem(name.value));
+      user = JSON.parse(localStorage.getItem("users." + name.value));
     }
 
     this._showNotification("Welcome back, " + name.value + "!", "success");
@@ -141,7 +141,7 @@ export class HomeView extends LitElement {
 
     // If it doesnt exist, create it
     if (localStorage.getItem(name.value) == null) {
-      localStorage.setItem(name.value, JSON.stringify(user));
+      localStorage.setItem("users." + name.value, JSON.stringify(user));
     }
     // Else we throw erro
     else {
@@ -150,6 +150,17 @@ export class HomeView extends LitElement {
     }
 
     this._showNotification("Welcome aboard, " + name.value + "!", "success");
+
+    // Even we're on register, redirect to the game
+    // Send the data of the current user
+    this.dispatchEvent(
+      new CustomEvent("on-login", {
+        detail: {
+          view: "game",
+          user: user,
+        },
+      })
+    );
   }
 
 

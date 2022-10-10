@@ -18,7 +18,7 @@ export class GameView extends LitElement {
       },
       _resultText: {
         type: String,
-      }
+      },
     };
   }
 
@@ -42,7 +42,7 @@ export class GameView extends LitElement {
   // If the current user is stored
   firstUpdated() {
     this.currentUser = JSON.parse(
-      localStorage.getItem(localStorage.getItem("user"))
+      localStorage.getItem("users." + localStorage.getItem("currentUser"))
     );
   }
 
@@ -101,14 +101,14 @@ export class GameView extends LitElement {
 
       if (option.beats.includes(botOption.text)) {
         this.currentUser.wins++;
-        this._resultText = "You won! 🎉🎉🎉"
+        this._resultText = "You won! 🎉🎉🎉";
       } else if (botOption.beats.includes(option.text)) {
         this.currentUser.defeats++;
-        this._resultText = "You lost... 😭😭😭"
+        this._resultText = "You lost... 😭😭😭";
       } else if (!option.text === botOption.text) {
         this._showNotification("You're cheating!", "error");
       } else {
-        this._resultText = "It's a tie 🙅🙅🙅"
+        this._resultText = "It's a tie 🙅🙅🙅";
       }
 
       // So the component reloads
@@ -122,7 +122,7 @@ export class GameView extends LitElement {
 
   _saveScore() {
     localStorage.setItem(
-      this.currentUser.name,
+      "users." + this.currentUser.name,
       JSON.stringify(this.currentUser)
     );
   }

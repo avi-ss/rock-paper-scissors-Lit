@@ -1,6 +1,7 @@
 import { LitElement, html, css } from "lit";
 
 import "@vaadin/grid";
+import '@vaadin/grid/vaadin-grid-sort-column.js';
 
 export class RankingView extends LitElement {
   static get properties() {
@@ -15,26 +16,22 @@ export class RankingView extends LitElement {
     super();
 
     this.users = [];
-  }
 
-  firstUpdated() {
     for (let i = 0; i < localStorage.length; i++) {
-      if (localStorage.key(i) != "user") {
+      if (/(users\.)+/.test(localStorage.key(i))) {
         this.users.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
       }
     }
-
-    this.users = [...this.users];
   }
 
   render() {
     return html`
       <div class="container">
         <vaadin-grid .items="${this.users}">
-          <vaadin-grid-column path="name"></vaadin-grid-column>
-          <vaadin-grid-column path="gender"></vaadin-grid-column>
-          <vaadin-grid-column path="wins"></vaadin-grid-column>
-          <vaadin-grid-column path="defeats"></vaadin-grid-column>
+          <vaadin-grid-sort-column path="name"></vaadin-grid-sort-column>
+          <vaadin-grid-sort-column path="gender"></vaadin-grid-sort-column>
+          <vaadin-grid-sort-column path="wins"></vaadin-grid-sort-column>
+          <vaadin-grid-sort-column path="defeats"></vaadin-grid-sort-column>
         </vaadin-grid>
       </div>
     `;

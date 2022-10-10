@@ -25,9 +25,7 @@ export class RockPaperScissors extends LitElement {
 
     this.view = "home";
     this.currentUser = {};
-  }
 
-  firstUpdated() {
     // Setting the router
     installRouter((location) => {
       this.handleNavigation(location);
@@ -64,7 +62,7 @@ export class RockPaperScissors extends LitElement {
     // From login, we save the current user (this might be not necessary)
     this.currentUser = data.user;
     // TODO: "user" cant be a username, but its not the best option
-    localStorage.setItem("user", this.currentUser.name);
+    localStorage.setItem("currentUser", this.currentUser.name);
   }
 
   render() {
