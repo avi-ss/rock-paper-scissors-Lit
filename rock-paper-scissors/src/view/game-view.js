@@ -24,13 +24,17 @@ export class GameView extends LitElement {
       { text: "✌️", beats: "🖐" },
     ];
   }
-
+  
   render() {
     return html`
-      <vaadin-menu-bar
-        .items=${this.options}
-        @item-selected=${this.onOptionSelected}
-      ></vaadin-menu-bar>
+      <div class="container">
+        <h1>Hi, ${this.currentUser.name}! 👋</h1>
+        <vaadin-menu-bar
+          theme="primary center"
+          .items=${this.options}
+          @item-selected=${this.onOptionSelected}
+        ></vaadin-menu-bar>
+      </div>
     `;
   }
 
@@ -69,7 +73,23 @@ export class GameView extends LitElement {
   }
 
   static get styles() {
-    return css``;
+    return css`
+      .container {
+        margin: auto;
+        margin-top: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .container h1 {
+        text-align: center;
+      }
+
+      vaadin-menu-bar {
+        font-size: 24px;
+      }
+    `;
   }
 }
 

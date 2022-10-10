@@ -20,24 +20,26 @@ export class HomeView extends LitElement {
 
   render() {
     return html`
-      <vaadin-text-field
-        id="name"
-        label="Your name!"
-        placeholder="5 characters at least!"
-        minlength="5"
-        maxlength="12"
-        pattern="^[^0-9\\\\]\\w+$"
-        error-message="Only letters and numbers!"
-        @invalid-changed=${(e) => (this._isNameValid = e.detail.value)}
-        required
-      >
-      </vaadin-text-field>
-      <vaadin-button
-        theme="primary"
-        @click=${this.onLogin}
-        ?disabled=${this._isNameValid}
-        >Join</vaadin-button
-      >
+      <div class="container">
+        <vaadin-text-field
+          id="name"
+          label="Your name!"
+          placeholder="5 characters at least!"
+          minlength="5"
+          maxlength="12"
+          pattern="^[^0-9\\\\]\\w+$"
+          error-message="Only letters and numbers!"
+          @invalid-changed=${(e) => (this._isNameValid = e.detail.value)}
+          required
+        >
+        </vaadin-text-field>
+        <vaadin-button
+          theme="primary"
+          @click=${this.onLogin}
+          ?disabled=${this._isNameValid}
+          >Join</vaadin-button
+        >
+      </div>
     `;
   }
 
@@ -80,7 +82,20 @@ export class HomeView extends LitElement {
   }
 
   static get styles() {
-    return css``;
+    return css`
+      .container {
+        margin: auto;
+        margin-top: 40px;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .container > * {
+        max-width: 30vw;
+        width: 100%;
+      }
+    `;
   }
 }
 

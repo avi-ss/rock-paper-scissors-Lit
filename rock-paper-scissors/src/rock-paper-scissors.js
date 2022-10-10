@@ -44,24 +44,21 @@ export class RockPaperScissors extends LitElement {
     switch (this.view) {
       case "home": {
         return html`<home-view
-          @on-login=${(event) => this.navigateTo(event)}
+          @on-login=${(event) => this.navigateTo(event.detail)}
         ></home-view>`;
       }
       case "game": {
-        return html`<game-view
-          .currentUser=${this.currentUser}
-          @on-back=${(event) => this.navigateTo(event)}
-        ></game-view>`;
+        return html`<game-view .currentUser=${this.currentUser}></game-view>`;
       }
     }
   }
 
-  navigateTo(event) {
-    window.history.pushState({}, "", event.detail.view);
+  navigateTo(data) {
+    window.history.pushState({}, "", data.view);
     this.handleNavigation(window.location);
 
     // From login, we save the current user
-    this.currentUser = event.detail.user;
+    this.currentUser = data.user;
     // TODO: Save it in the local storage
   }
 
@@ -69,7 +66,12 @@ export class RockPaperScissors extends LitElement {
     return html`
       <div class="header">
         <h1>🪨, 📜, ✂️!</h1>
-        <vaadin-button class="button" theme="icon">🏠</vaadin-button>
+        <vaadin-button
+          class="button"
+          theme="icon"
+          @click=${() => this.navigateTo({ view: "home", user: {} })}
+          >🏠</vaadin-button
+        >
       </div>
       ${this.getActiveView()}
     `;
@@ -82,7 +84,6 @@ export class RockPaperScissors extends LitElement {
       }
 
       .button {
-        margin-right: 16px;
         font-size: 30px;
         height: 60px;
         width: 60px;
@@ -98,7 +99,8 @@ export class RockPaperScissors extends LitElement {
         left: 0;
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: center;
+        gap: 40px;
       }
     `;
   }
