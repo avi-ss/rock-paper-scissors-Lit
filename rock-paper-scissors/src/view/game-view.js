@@ -27,9 +27,9 @@ export class GameView extends LitElement {
 
   // If the current user is stored
   firstUpdated() {
-    this.currentUser = JSON.parse(localStorage.getItem("user"));
-    
-    console.log(this.currentUser);
+    this.currentUser = JSON.parse(
+      localStorage.getItem(localStorage.getItem("user"))
+    );
   }
 
   render() {
@@ -54,6 +54,7 @@ export class GameView extends LitElement {
 
       if (option.beats === botOption.text) {
         console.log("You won! " + option.text + " - " + botOption.text);
+        this.currentUser.score++;
       } else if (botOption.beats === option.text) {
         console.log("You lost... " + option.text + " - " + botOption.text);
       } else if (option.text === botOption.text) {
@@ -62,7 +63,13 @@ export class GameView extends LitElement {
         console.log("Cheater detected!");
         this._showNotification("You're cheating!", "error");
       }
+
+      this._saveScore();
     }, 1000);
+  }
+
+  _saveScore() {
+    localStorage.setItem(this.currentUser.name, JSON.stringify(this.currentUser));
   }
 
   _showNotification(text, theme) {

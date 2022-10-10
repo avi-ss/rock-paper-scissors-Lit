@@ -60,7 +60,7 @@ export class RockPaperScissors extends LitElement {
     // From login, we save the current user (this might be not necessary)
     this.currentUser = data.user;
     // TODO: "user" cant be a username, but its not the best option
-    localStorage.setItem("user", JSON.stringify(this.currentUser));
+    localStorage.setItem("user", this.currentUser.name);
   }
 
   render() {
