@@ -13,8 +13,8 @@
   "dependencies": {
     "@vaadin/button": "^23.2.4",
     "@vaadin/icons": "^23.2.4",
-    "@vaadin/menu-bar": "^23.2.4",
     "@vaadin/notification": "^23.2.4",
+    "@vaadin/radio-group": "^23.2.4",
     "@vaadin/text-field": "^23.2.4",
     "lit": "^2.0.2",
     "pwa-helpers": "^0.9.1"

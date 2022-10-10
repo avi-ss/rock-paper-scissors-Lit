@@ -2,6 +2,8 @@ import { LitElement, html, css } from "lit";
 
 import "@vaadin/text-field";
 import "@vaadin/button";
+import "@vaadin/radio-group";
+
 import { Notification } from "@vaadin/notification";
 
 export class HomeView extends LitElement {
@@ -21,6 +23,21 @@ export class HomeView extends LitElement {
   render() {
     return html`
       <div class="container">
+        <vaadin-radio-group id="gender" label="Select your gender! 👽" theme="horizontal" required>
+          <vaadin-radio-button
+            value="👧"
+            label="👧"
+            checked
+          ></vaadin-radio-button>
+          <vaadin-radio-button
+            value="👦"
+            label="👦"
+          ></vaadin-radio-button>
+          <vaadin-radio-button
+            value="👽"
+            label="👽"
+          ></vaadin-radio-button>
+        </vaadin-radio-group>
         <vaadin-text-field
           id="name"
           label="Your name!"
@@ -45,6 +62,7 @@ export class HomeView extends LitElement {
 
   onLogin() {
     const name = this.shadowRoot.getElementById("name");
+    const gender = this.shadowRoot.getElementById("gender");
 
     // Validate its not null
     if (name.value == "") {
@@ -54,13 +72,14 @@ export class HomeView extends LitElement {
 
     let user = {
       name: name.value,
+      gender: gender.value,
       wins: 0,
-      defeats: 0
-    }
+      defeats: 0,
+    };
 
     // If it doesnt exist, create it
-    if(localStorage.getItem(name.value) == null){
-      localStorage.setItem(name.value, JSON.stringify(user))
+    if (localStorage.getItem(name.value) == null) {
+      localStorage.setItem(name.value, JSON.stringify(user));
     }
     // Else we return it
     else {
@@ -74,7 +93,7 @@ export class HomeView extends LitElement {
       new CustomEvent("on-login", {
         detail: {
           view: "game",
-          user: user
+          user: user,
         },
       })
     );
@@ -107,6 +126,10 @@ export class HomeView extends LitElement {
       .container > * {
         max-width: 30vw;
         width: 100%;
+      }
+
+      vaadin-radio-button {
+        font-size:64px;
       }
     `;
   }
