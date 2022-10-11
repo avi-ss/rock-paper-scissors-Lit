@@ -8,4 +8,10 @@ export default css`
     margin-top: 1.5rem;
     width: 60%;
   }
+
+  @media (max-width: 1200px) {
+    .container {
+      width: 80%;
+    }
+  }
 `;
