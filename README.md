@@ -2,12 +2,19 @@
 
 [![Built with open-wc recommendations](https://img.shields.io/badge/built%20with-open--wc-blue.svg)](https://github.com/open-wc)
 
+#### Rock, Paper, Scissors! is a progressive mobile web app about the world-known "rock, paper, scissors", expanded with the lizard and Spock. The app doesn't require a server to work, nor it require an internet conexion to work.
+
+### Tech Stack
+
+It's made entirely with Lit
+
 ## Quickstart
 
 To get started:
 
 ```bash
-npm init @open-wc
+npm install
+npm run start
 # requires node 10 & npm 6 or higher
 ```
 
@@ -17,11 +24,12 @@ npm init @open-wc
 - `start:build` runs your app after it has been built using the build command
 - `build` builds your app and outputs it in your `dist` directory
 - `test` runs your test suite with Web Test Runner
-- `lint` runs the linter for your project
-- `format` fixes linting and formatting errors
 
-## Tooling configs
+## Details
 
-For most of the tools, the configuration is in the `package.json` to reduce the amount of files in your project.
+The game has 3 different views: `home`, `game` & `ranking`.
+- `home`: It contains the register and the login form.
+- `game`: The game itself, it also contains information about the profile.
+- `ranking`: It shows a table with the existing players along with their scores.
 
-If you customize the configuration a lot, you can consider moving them to individual files.
+All the information is stored in the `localStorage` of the browser.
