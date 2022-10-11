@@ -52,6 +52,12 @@ export class RockPaperScissors extends LitElement {
       case "ranking": {
         return html`<ranking-view></ranking-view>`;
       }
+      // Return to home view in case we set a non existing path
+      default: {
+        return html`<home-view
+          @on-login=${(event) => this.navigateTo(event.detail)}
+        ></home-view>`;
+      }
     }
   }
 
