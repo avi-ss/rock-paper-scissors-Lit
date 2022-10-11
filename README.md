@@ -2,11 +2,11 @@
 
 [![Built with open-wc recommendations](https://img.shields.io/badge/built%20with-open--wc-blue.svg)](https://github.com/open-wc)
 
-#### Rock, Paper, Scissors! is a progressive mobile web app about the world-known "rock, paper, scissors", expanded with the lizard and Spock. The app doesn't require a server to work, nor it require an internet conexion to work.
+#### Rock, Paper, Scissors! is a progressive mobile web app about the world-known "rock, paper, scissors", expanded with the lizard and Spock. The app doesn't require a server to work, nor it requires an internet conexion to work once it has started.
 
 ### Tech Stack
 
-It's made entirely with Lit
+It's made entirely with Lit and deployed using [Netlify](https://rock-paper-scissors-lit.netlify.app/)
 
 ## Quickstart
 
