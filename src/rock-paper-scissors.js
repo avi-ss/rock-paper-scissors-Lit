@@ -1,6 +1,10 @@
-import { LitElement, html, css } from "lit";
+import { LitElement, html } from "lit";
 
 import { installRouter } from "pwa-helpers/router.js";
+
+import styles from "./styles/app.styles";
+
+import * as utils from "./utils/utils";
 
 import "./view/home-view";
 import "./view/game-view";
@@ -42,39 +46,46 @@ export class RockPaperScissors extends LitElement {
   getActiveView() {
     switch (this.view) {
       case "home": {
-        return html`<home-view
-          @on-login=${(event) => this.navigateTo(event.detail)}
-        ></home-view>`;
+        return html`<home-view @on-login=${this.onLogin}></home-view>`;
       }
       case "game": {
-        return html`<game-view .currentUser=${this.currentUser}></game-view>`;
+        // Prevent the user to enter the game without login
+        if (Object.entries(this.currentUser).length === 0) {
+          this.navigateTo({ view: "home", user: {} });
+          return html`<home-view @on-login=${this.onLogin}></home-view>`;
+        } else {
+          return html`<game-view .currentUser=${this.currentUser}></game-view>`;
+        }
       }
       case "ranking": {
         return html`<ranking-view></ranking-view>`;
       }
       // Return to home view in case we set a non existing path
       default: {
-        return html`<home-view
-          @on-login=${(event) => this.navigateTo(event.detail)}
-        ></home-view>`;
+        this.navigateTo({ view: "home", user: {} });
+        return html`<home-view @on-login=${this.onLogin}></home-view>`;
       }
     }
+  }
+
+  onLogin(event) {
+    utils._showNotification("Welcome, " + event.detail.user.name + "!", "success");
+    this.navigateTo(event.detail);
   }
 
   navigateTo(data) {
     window.history.pushState({}, "", data.view);
     this.handleNavigation(window.location);
 
-    // From login, we save the current user (this might be not necessary)
+    // From login, we save the current user
     this.currentUser = data.user;
-    // TODO: "user" cant be a username, but its not the best option
     localStorage.setItem("currentUser", this.currentUser.name);
   }
 
   render() {
     return html`
       <div class="header">
-        <h1>🪨, 📜, ✂️, 🦎, 🧛🏻!</h1>
+        <h1 class="title">🪨, 📜, ✂️, 🦎, 🧛🏻!</h1>
         <vaadin-button
           class="button"
           theme="icon"
@@ -93,39 +104,7 @@ export class RockPaperScissors extends LitElement {
   }
 
   static get styles() {
-    return css`
-      h1 {
-        margin: 16px;
-      }
-
-      .button {
-        font-size: 30px;
-        height: 60px;
-        width: 60px;
-        background-color: rgba(255, 255, 255, 0.7);
-        transition: all 0.2s linear;
-      }
-
-      .button:hover {
-        background-color: rgba(255, 255, 255, 0.9);
-        box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.3);
-      }
-
-      .header {
-        height: 80px;
-        width: 100%;
-        box-sizing: border-box;
-        position: sticky;
-        top: 0;
-        left: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 20px;
-        background-color: pink;
-        box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.3);
-      }
-    `;
+    return styles;
   }
 }
 

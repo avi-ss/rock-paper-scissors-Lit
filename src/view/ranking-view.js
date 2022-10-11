@@ -1,4 +1,6 @@
-import { LitElement, html, css } from "lit";
+import { LitElement, html } from "lit";
+
+import styles from "../styles/ranking-view.styles";
 
 import "@vaadin/grid";
 import '@vaadin/grid/vaadin-grid-sort-column.js';
@@ -38,15 +40,7 @@ export class RankingView extends LitElement {
   }
 
   static get styles() {
-    return css`
-      .container {
-        display: flex;
-        align-items: center;
-        margin: auto;
-        margin-top: 20px;
-        width: 60%;
-      }
-    `;
+    return styles;
   }
 }
 
