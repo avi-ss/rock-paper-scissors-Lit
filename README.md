@@ -6,7 +6,7 @@
 
 ### Tech Stack
 
-It's made entirely with Lit and deployed using [Netlify](https://rock-paper-scissors-lit.netlify.app/)
+It's made entirely with Lit and deployed using Netlify. You can open the app clicking [here](https://rock-paper-scissors-lit.netlify.app/).
 
 ## Quickstart
 
