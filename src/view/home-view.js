@@ -29,7 +29,7 @@ export class HomeView extends LitElement {
     return html`
       <div class="container">
         <div class="form register">
-          <h2>Register ✍️</h2>
+          <h2 class="title">Register ✍️</h2>
           <vaadin-radio-group
             id="gender"
             label="Select your gender! 👽"
@@ -65,7 +65,7 @@ export class HomeView extends LitElement {
           >
         </div>
         <div class="form login">
-          <h2>Login 👋</h2>
+          <h2 class="title">Login 👋</h2>
           <vaadin-text-field
             id="loginName"
             label="Your name!"
