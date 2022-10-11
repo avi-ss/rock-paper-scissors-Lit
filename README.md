@@ -4,7 +4,7 @@
 
 #### Rock, Paper, Scissors! is a progressive mobile web app about the world-known "rock, paper, scissors", expanded with the lizard and Spock. The app doesn't require a server to work, nor it requires an internet conexion to work once it has started.
 
-### Tech Stack
+## Tech Stack
 
 It's made entirely with Lit and deployed using Netlify. You can open the app clicking [here](https://rock-paper-scissors-lit.netlify.app/).
 
