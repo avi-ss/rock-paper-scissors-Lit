@@ -56,7 +56,7 @@ export class GameView extends LitElement {
   render() {
     return html`
       <div class="container">
-        <h1 style="margin-bottom: 50px">
+        <h1 class="header">
           Hi, ${this.currentUser.name}! 👋 <br />
           ${this.currentUser.gender} ${this.currentUser.wins} -
           ${this.currentUser.defeats} 🤖
