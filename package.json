@@ -11,7 +11,7 @@
     "analyze": "cem analyze --litelement",
     "start": "web-dev-server --app-index index.html",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d dist",
     "build": "rimraf dist && rollup -c rollup.config.js",
     "start:build": "npm run build && es-dev-server --root-dir dist --app-index index.html --compatibility none --open"
   },
