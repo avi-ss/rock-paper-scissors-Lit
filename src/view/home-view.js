@@ -95,11 +95,9 @@ export class HomeView extends LitElement {
     // Validate its not null
     if (!name.value) {
       utils._showNotification("Name can't be empty!", "error");
-      return;
     }
-
-    if (!localStorage.getItem("users." + name.value)) {
-      // The player doesn't exist
+    // The player doesn't exist
+    else if (!localStorage.getItem("users." + name.value)) {
       utils._showNotification("This player doesn't exist!", "error");
     }
     // Else we return it
@@ -116,11 +114,9 @@ export class HomeView extends LitElement {
     // Validate its not null
     if (name.value == "") {
       utils._showNotification("Name can't be empty!", "error");
-      return;
     }
-
     // If it doesn't exist, create it
-    if (!localStorage.getItem(name.value)) {
+    else if (!localStorage.getItem(name.value)) {
       let user = {
         name: name.value,
         gender: gender.value,
@@ -130,8 +126,7 @@ export class HomeView extends LitElement {
       localStorage.setItem("users." + name.value, JSON.stringify(user));
       // Even we're on register, redirect to the game
       this._onLoginEvent("game", user);
-    }
-    else {
+    } else {
       utils._showNotification("This name is already taken!", "error");
     }
   }
